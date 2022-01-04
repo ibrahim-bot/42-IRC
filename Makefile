@@ -14,25 +14,25 @@ NAME		=			ircserv
 
 HEADER		=			irc.hpp
 
+SRCS		=			main.cpp
+
 GCC			=			clang++
 
-OBJS        =			$(SRCS:.c=.o)
+OBJS        =			$(SRCS:.cpp=.o)
 
-RM			=			rm -f
+RM			=			rm -rf
 
 FLAGS		=			-Wall -Wextra -Werror -std=c++98
 
 INCLUDE		=			
 
-SRCS		=			main.cpp \
-
 all:	$(NAME)
 
 %.o : %.cpp
-	$(CC) $(CFLAGS) -o $@ -c $<
+	$(CC) $(CFLAGS) -c $< -o $@
 
 $(NAME): $(OBJS)
-	$(GCC) $(INCLUDE) $(FLAGS) -o $(NAME) $(OBJS)
+	$(GCC) $(FLAGS) $(OBJS) $(INCLUDE) -o $(NAME)
 
 clean:
 	$(RM) $(OBJS)
