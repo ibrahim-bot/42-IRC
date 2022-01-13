@@ -6,7 +6,7 @@
 /*   By: ichougra <ichougra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 15:53:22 by ichougra          #+#    #+#             */
-/*   Updated: 2021/12/14 16:11:20 by ichougra         ###   ########.fr       */
+/*   Updated: 2022/01/11 15:37:44 by ichougra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ typedef struct User
 
 int main(void)
 {
-    int socketServer = socket(AF_INET, SOCK_STREAM, 0); //creer une socket; AF_INET = IPv4; SOCK_STREAM = TCP; PROTOCOL = 0
+    int socketServer = socket(AF_INET, SOCK_STREAM, getprotobyname("tcp")->p_proto); //creer une socket; AF_INET = IPv4; SOCK_STREAM = TCP; PROTOCOL = 0
     struct sockaddr_in addrServer; // struct pour configurer l'addresse du serveur
 
     addrServer.sin_addr.s_addr = inet_addr("127.0.0.1"); //attribuer laddresse

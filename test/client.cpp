@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   client.cpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ibrahimchougrani <ibrahimchougrani@stud    +#+  +:+       +#+        */
+/*   By: ichougra <ichougra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 12:34:46 by ichougra          #+#    #+#             */
-/*   Updated: 2022/01/04 12:22:52 by ibrahimchou      ###   ########.fr       */
+/*   Updated: 2022/01/11 15:39:03 by ichougra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,14 @@ typedef struct User
 int main()
 {
     //------------------RIEN DE NOUVEAU--------------------
-    int socketClient = socket(AF_INET, SOCK_STREAM, 0); // creer une socket de connexion;
+    int socketClient = socket(AF_INET, SOCK_STREAM, getprotobyname("TCP")->p_proto); // creer une socket de connexion;
     
     struct sockaddr_in addrClient; // struct d'addresse serveur 
     addrClient.sin_addr.s_addr = inet_addr("127.0.0.1"); // attribuer laddress
     addrClient.sin_family = AF_INET; // type d'addresse (ipv4)
     addrClient.sin_port = htons(30000); // port de connection
     //-----------------------------------------------------
+
     connect(socketClient, (const struct sockaddr *)&addrClient, sizeof(addrClient)); //connecter le server a la socket
     printf("connect\n");
 

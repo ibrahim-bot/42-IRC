@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   client.cpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ibrahimchougrani <ibrahimchougrani@stud    +#+  +:+       +#+        */
+/*   By: ichougra <ichougra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/04 12:23:07 by ibrahimchou       #+#    #+#             */
-/*   Updated: 2022/01/04 12:25:34 by ibrahimchou      ###   ########.fr       */
+/*   Created: 2021/12/14 12:34:46 by ichougra          #+#    #+#             */
+/*   Updated: 2022/01/06 17:15:17 by ichougra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <errno.h>
-#include <iostream>
 
 typedef struct User
 {
@@ -28,37 +27,25 @@ typedef struct User
     int age;
 }User;
 
-int main(void)
+int main()
 {
-    int socketServer = socket(AF_INET, SOCK_STREAM, 0); //creer une socket; AF_INET = IPv4; SOCK_STREAM = TCP; PROTOCOL = 0
-    struct sockaddr_in addrServer; // struct pour configurer l'addresse du serveur
+    //------------------RIEN DE NOUVEAU--------------------
+    int socketClient = socket(AF_INET, SOCK_STREAM, 0); // creer une socket de connexion;
+    
+    struct sockaddr_in addrClient; // struct d'addresse serveur 
+    addrClient.sin_addr.s_addr = inet_addr("127.0.0.1"); // attribuer laddress
+    addrClient.sin_family = AF_INET; // type d'addresse (ipv4)
+    addrClient.sin_port = htons(30000); // port de connection
+    //-----------------------------------------------------
+    
+    connect(socketClient, (const struct sockaddr *)&addrClient, sizeof(addrClient)); //connecter le server a la socket
+    printf("connect\n");
 
-    addrServer.sin_addr.s_addr = inet_addr("127.0.0.1"); //attribuer laddresse
-    addrServer.sin_family = AF_INET; // type d'addresse
-    addrServer.sin_port = htons(30000); // choisir le port
+    User user;
+    recv(socketClient, &user, sizeof(User), 0);
+//recevoir les donnes; du client qui est connecter au server; addresse ou mettre les donnees; taille des donnés;
 
-    bind(socketServer, (const struct sockaddr *)&addrServer, sizeof(addrServer)); // connecter le serveur au reseau; le serveur a connecter; un pointeur sur sockaddr; taille du addrserveur 
-    printf("Bind : %d\n", socketServer);
-
-    listen(socketServer, 5); // serveur ecoute; nombre de client en connection
-    printf("listen\n");
-
-    struct sockaddr_in addrClient;
-    socklen_t csize = sizeof(addrClient);
-    int socketClient = accept(socketServer, (struct sockaddr *)&addrClient, &csize); // boucle infini a attendre q'un client ce connect
-    printf("Accept\n");
-
-    printf("client : %d\n", socketClient);
-
-    User user = {
-        .name = "TOMATE",
-        .age = 19
-    }; // info a envoyer
-    send(socketClient, &user, sizeof(user), 0); // transmettre au coter client; par le socketClient; info a transmettre; taille des info
-
-    close(socketClient);
-    close(socketServer);
-    std::cout << "close\n";
-
-    return 0;
+    printf("Name = %s \nAge = %d\n", user.name, user.age);//afficher les info
+    close(socketClient); // ne pas oubllie de fermer le socket
+    return (0);
 }
