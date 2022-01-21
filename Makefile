@@ -1,45 +1,84 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: ichougra <ichougra@student.42.fr>          +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2021/12/14 12:32:01 by ichougra          #+#    #+#              #
-#    Updated: 2021/12/14 12:34:34 by ichougra         ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
+NAME 		= serveur
 
-NAME		=			ircserv
+CC 	 		= clang++ -Wall -Wextra -Werror
 
-HEADER		=			irc.hpp
+DIR_SRC			= srcs/
 
-SRCS		=			main.cpp
+SRC  		=	main.cpp\
+				server.cpp\
+				socket.cpp\
+				init.cpp\
+				util.cpp\
+				cmd.cpp\
+				cmd_join.cpp\
+				cmd_leave.cpp\
+				cmd_msg.cpp\
+				cmd_nick.cpp\
+				cmd_who.cpp\
+				ring_buffer.cpp
 
-GCC			=			clang++
+SRCS		=	$(addprefix $(DIR_SRC), $(SRC))
 
-OBJS        =			$(SRCS:.cpp=.o)
+OBJ  		= $(SRCS:.cpp=.o)
 
-RM			=			rm -rf
+INC_DIR		= ./incs/
 
-FLAGS		=			-Wall -Wextra -Werror -std=c++98
+all: $(NAME)
 
-INCLUDE		=			
+$(LIBFT):
+	@clear
+	@printf "Compiling libft ... "
+	@make -C libft/
+	@echo "Done"
 
-all:	$(NAME)
+$(NAME) : 	msg $(OBJ) $(HEADERS) comp
+			@$(CC) $(CFLAGS) -o $(NAME) $(OBJ)
 
-%.o : %.cpp
-	$(CC) $(CFLAGS) -c $< -o $@
-
-$(NAME): $(OBJS)
-	$(GCC) $(FLAGS) $(OBJS) $(INCLUDE) -o $(NAME)
+%.o: %.cpp
+			$(CC) $(CFLAGS) -I $(INC_DIR) -c $< -o $@
+			printf "$(GREEN2)███"
 
 clean:
-	$(RM) $(OBJS)
+			@rm -f $(OBJ)
+			@echo ${ORANGE}"Cleaning"$(NC)
 
-fclean:	clean
-	$(RM) $(NAME)
+fclean: clean
+			@rm -f $(NAME)
+			@echo ${GREEN}"Cleaning EXEC and LIB"$(NC)
 
-re:			fclean all
+re:		clean all
 
-.PHONY: re clean fclean
+run: re
+	@echo $(GREEN)"Start!"$(NC)
+	@./$(NAME) localhost:127.0.0.1:0 6667 23
+
+nc:
+	@echo $(GREEN)"Enter to server new user"$(NC)
+	@nc 127.0.0.1 6667
+
+.PHONY: all, clean, fclean, re, run, nc
+
+.SILENT:
+
+#----END-----#
+NC='\033[0m'
+
+#--------Colors---------#
+GREEN ='\033[1;32m'
+GREEN2 = \033[32m
+ORANGE ='\033[1;33m'
+BLACK = \033[0;30m
+RED = \033[0;31m
+YELLOW = \033[33;33m
+BLUE = \033[0;34m
+PURPLE = \033[1;35m
+CYAN = \033[1;36m
+WHITE = \033[0;37m
+
+#-----------PRINT------#
+msg:
+	@echo $(ORANGE)"Wait for compilation..."$(NC)
+
+comp:
+	@echo $(GREEN)" √ "$(NC)
+	@echo $(GREEN)"==> Compile successfully"$(NC)
