@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_nick.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ibrahimchougrani <ibrahimchougrani@stud    +#+  +:+       +#+        */
+/*   By: ichougragrani <ichougragrani@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/03/14 14:48:53 by hivian            #+#    #+#             */
-/*   Updated: 2022/01/21 03:22:35 by ibrahimchou      ###   ########.fr       */
+/*   Created: 2017/03/14 14:48:53 by ichougra            #+#    #+#             */
+/*   Updated: 2022/01/21 03:22:35 by ichougra      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

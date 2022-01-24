@@ -1,26 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstdelone.c                                     :+:      :+:    :+:   */
+/*   write.cpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hivian <hivian@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ichougragrani <ichougragrani@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/11/12 08:43:01 by hivian            #+#    #+#             */
-/*   Updated: 2014/11/14 11:18:21 by hivian           ###   ########.fr       */
+/*   Created: 2022/01/23 06:40:58 by ichougra       #+#    #+#             */
+/*   Updated: 2022/01/23 06:41:21 by ichougra      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "server.hpp"
 
-void	ft_lstdelone(t_list **alst, void (*del)(void *, size_t))
+void    server_write(t_env *e, int i)
 {
-	if (alst != NULL)
-	{
-		if (*alst != NULL)
-		{
-			(*del)((**alst).content, (**alst).content_size);
-			free(*alst);
-		}
-		*alst = NULL;
-	}
+    send(i, e->fds[i].buf_write, strlen(e->fds[i].buf_write), 0);
+    memset(e->fds[i].buf_write, 0, BUF_SIZE + 1);
 }

@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ring_buffer.cpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ibrahimchougrani <ibrahimchougrani@stud    +#+  +:+       +#+        */
+/*   By: ichougragrani <ichougragrani@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/03/15 15:41:22 by hivian            #+#    #+#             */
-/*   Updated: 2022/01/21 03:16:17 by ibrahimchou      ###   ########.fr       */
+/*   Created: 2017/03/15 15:41:22 by ichougra            #+#    #+#             */
+/*   Updated: 2022/01/23 10:52:23 by ichougra      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "server.hpp"
 
-static void			handle_buf(t_env *e, int cs, char *buf)
+static void	handle_buf(t_env *e, int cs, char *buf)
 {
 	if (buf[0] == '/')
 		run_cmd(e, cs, buf);
@@ -20,15 +20,15 @@ static void			handle_buf(t_env *e, int cs, char *buf)
 		send_to_chan(e, buf, MSG_STD, cs);
 }
 
-void				ring_buffer_write(t_env *e, int cs, char *msg)
+void	ring_buffer_write(t_env *e, int cs, char *msg)
 {
-	char			buf[BUF_SIZE + 1];
-	size_t			i;
-	size_t			j;
+	char	buf[BUF_SIZE + 1];
+	size_t	i;
+	size_t	j;
 
 	i = 0;
 	j = 0;
-	memset(buf, 0, BUF_SIZE + 1);
+	memset(buf, 0, BUF_SIZE + 1);	
 	if (msg[strlen(msg) - 1] == '\n')
 		handle_buf(e, cs, msg);
 	else
@@ -46,7 +46,7 @@ void				ring_buffer_write(t_env *e, int cs, char *msg)
 	}
 }
 
-void				ring_buffer_read(t_env *e, int cs, char *msg)
+void	ring_buffer_read(t_env *e, int cs, char *msg)
 {
 	static char		buf[BUF_SIZE + 1];
 	size_t			i;

@@ -5,12 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ibrahimchougrani <ibrahimchougrani@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/02/23 10:29:21 by hivian            #+#    #+#             */
-/*   Updated: 2022/01/21 03:41:38 by ibrahimchou      ###   ########.fr       */
+/*   Created: 2022/01/23 23:56:45 by ibrahimchou       #+#    #+#             */
+/*   Updated: 2022/01/24 00:19:09 by ibrahimchou      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SERVER_HPP
+#ifndef SERVER_HPP 
 # define SERVER_HPP
 
 // # include "../libft/incs/libft.h"
@@ -54,6 +54,7 @@
 # define MAX_CONNECTION 42
 
 typedef struct sockaddr_in	t_sockaddr_in;
+typedef struct s_env t_env;
 
 typedef struct		s_user
 {
@@ -61,16 +62,18 @@ typedef struct		s_user
 	char			nickname[NICK_SIZE + 1];
 }					t_user;
 
-typedef struct s_env t_env;
-
 typedef struct		s_fd
 {
 	int				type;
+
 	void			(*fct_read)(t_env *, int i);
 	void			(*fct_write)(t_env *, int i);
+	
 	char			buf_read[BUF_SIZE + 1];
 	char			buf_write[BUF_SIZE + 1];
+	
 	t_user			user;
+	
 }					t_fd;
 
 typedef struct		s_env
@@ -80,7 +83,7 @@ typedef struct		s_env
 	t_sockaddr_in	csin;
 	socklen_t		cslen;
 	
-	int				port;
+	std::string		port;
 	int				sock;
 
 	int				cs;
@@ -118,6 +121,7 @@ class Server
 		int				setSocket(struct addrinfo *p);
 		int				setBind(struct addrinfo *p);
 
+		void			init_env(t_env *e);
 
 	public:
 		Server(std::string, std::string, std::string);
@@ -132,7 +136,6 @@ void				clean_fd(int i, t_env *e);
 int					duplicate_user(t_env *e, int cs, char *name);
 int					get_fd_from_usr(t_env *e, char *name);
 void				get_time(t_env *e);
-void				init_env(t_env *e);
 void				init_fd(t_env *e);
 void				join_chan(t_env *e, int cs, char **inp_arr);
 void				leave_chan(t_env *e, int cs, char **input_arr);
@@ -148,4 +151,9 @@ void				who_in_chan(t_env *e, int cs, char **input_arr);
 char	*ft_strtrim(char const *s);
 int			ft_arrlen(char **array);
 void	run_server(t_env *e);
+void    server_read(t_env *e, int i);
+void    server_write(t_env *e, int i);
+void	init_client(t_env *e);
+char	**split(char const *s, char c);
+
 #endif

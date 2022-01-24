@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   util.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ibrahimchougrani <ibrahimchougrani@stud    +#+  +:+       +#+        */
+/*   By: ichougragrani <ichougragrani@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/03/01 16:49:16 by hivian            #+#    #+#             */
-/*   Updated: 2022/01/21 03:21:22 by ibrahimchou      ###   ########.fr       */
+/*   Created: 2017/03/01 16:49:16 by ichougra            #+#    #+#             */
+/*   Updated: 2022/01/23 11:18:52 by ichougra      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,4 +74,47 @@ int			ft_arrlen(char **array)
 	while (array[i])
 		i++;
 	return (i);
+}
+
+char	*ft_strsub(char const *s, unsigned int start, size_t len)
+{
+	char *dst;
+
+	if (!s)
+		return (NULL);
+	dst = (char *)malloc(sizeof(char) * len + 1);
+	if (!dst)
+		return (NULL);
+	dst = strncpy(dst, &s[start], len);
+	dst[len] = '\0';
+	return (dst);
+}
+
+char	**split(char const *s, char c)
+{
+	size_t	i;
+	size_t	d;
+	int		start;
+	int		end;
+	char	**tab;
+
+	i = 0;
+	d = 0;
+	if (!s)
+		return (NULL);
+	if (!(tab = (char **)malloc(sizeof(*tab) * (strlen(s) / 2 + 2))))
+		return (NULL);
+	while (s[i] != '\0')
+	{
+		while (s[i] && s[i] == c)
+			i++;
+		start = i;
+		while (s[i] && s[i] != c)
+			i++;
+		end = i;
+		if (end > start)
+			tab[d++] = ft_strsub(s, start, (end - start));
+	}
+	tab[d] = NULL;
+	return (tab);
 }

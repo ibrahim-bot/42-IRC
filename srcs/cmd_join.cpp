@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_join.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ibrahimchougrani <ibrahimchougrani@stud    +#+  +:+       +#+        */
+/*   By: ichougragrani <ichougragrani@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/03/14 11:46:26 by hivian            #+#    #+#             */
-/*   Updated: 2022/01/21 03:23:14 by ibrahimchou      ###   ########.fr       */
+/*   Created: 2017/03/14 11:46:26 by ichougra            #+#    #+#             */
+/*   Updated: 2022/01/21 03:23:14 by ichougra      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

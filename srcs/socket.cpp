@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   socket.cpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ibrahimchougrani <ibrahimchougrani@stud    +#+  +:+       +#+        */
+/*   By: ichougragrani <ichougragrani@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/21 00:27:21 by ibrahimchou       #+#    #+#             */
-/*   Updated: 2022/01/21 03:41:42 by ibrahimchou      ###   ########.fr       */
+/*   Created: 2022/01/21 00:27:21 by ichougra       #+#    #+#             */
+/*   Updated: 2022/01/23 07:10:02 by ichougra      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,8 @@ void	Server::createSocket()
 	
 	if (listen(_sock, MAX_CONNECTION) == -1)
 		throw std::runtime_error("error: listen");
-    
+    env.sock = _sock;
+	env.port = _port;
     env.fds[_sock].type = FD_SERV;
     env.fds[_sock].fct_read = srv_accept;
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_leave.cpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ibrahimchougrani <ibrahimchougrani@stud    +#+  +:+       +#+        */
+/*   By: ichougragrani <ichougragrani@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/03/14 12:05:42 by hivian            #+#    #+#             */
-/*   Updated: 2022/01/21 03:21:44 by ibrahimchou      ###   ########.fr       */
+/*   Created: 2017/03/14 12:05:42 by ichougra            #+#    #+#             */
+/*   Updated: 2022/01/21 03:21:44 by ichougra      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

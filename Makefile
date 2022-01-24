@@ -1,6 +1,6 @@
-NAME 		= serveur
+NAME 		= ircserv
 
-CC 	 		= clang++ -Wall -Wextra -Werror
+CC 	 		= clang++ -Wall -Wextra -Werror -std=c++98
 
 DIR_SRC			= srcs/
 
@@ -15,7 +15,11 @@ SRC  		=	main.cpp\
 				cmd_msg.cpp\
 				cmd_nick.cpp\
 				cmd_who.cpp\
-				ring_buffer.cpp
+				ring_buffer.cpp\
+				read.cpp\
+				write.cpp\
+				fd.cpp
+
 
 SRCS		=	$(addprefix $(DIR_SRC), $(SRC))
 
@@ -36,7 +40,7 @@ $(NAME) : 	msg $(OBJ) $(HEADERS) comp
 
 %.o: %.cpp
 			$(CC) $(CFLAGS) -I $(INC_DIR) -c $< -o $@
-			printf "$(GREEN2)███"
+			printf "$(GREEN2)██"
 
 clean:
 			@rm -f $(OBJ)
@@ -49,8 +53,8 @@ fclean: clean
 re:		clean all
 
 run: re
-	@echo $(GREEN)"Start!"$(NC)
-	@./$(NAME) localhost:127.0.0.1:0 6667 23
+	@echo $(GREEN)"Start! (localhost:127.0.0.1:0 6667 23)"$(NC)
+	@./$(NAME) 6667 23
 
 nc:
 	@echo $(GREEN)"Enter to server new user"$(NC)

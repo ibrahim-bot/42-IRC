@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_who.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ibrahimchougrani <ibrahimchougrani@stud    +#+  +:+       +#+        */
+/*   By: ichougragrani <ichougragrani@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/03/14 11:38:20 by hivian            #+#    #+#             */
-/*   Updated: 2022/01/21 03:23:50 by ibrahimchou      ###   ########.fr       */
+/*   Created: 2017/03/14 11:38:20 by ichougra            #+#    #+#             */
+/*   Updated: 2022/01/21 03:23:50 by ichougra      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
